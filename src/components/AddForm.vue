@@ -39,6 +39,7 @@ var addForm = {
             this.show= !this.show;
         },
         add: function(){
+            console.log(this.recipeIngredients);
             this.$emit('newR', {
                 title: this.recipeTitle,
                 ingredients: this.recipeIngredients,

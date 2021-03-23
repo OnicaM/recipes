@@ -45,6 +45,7 @@ export default {
           localStorage.removeItem('recipes');
         }
       }
+      console.log("array ",this.dataRecipes);
     },
  
       methods: {
