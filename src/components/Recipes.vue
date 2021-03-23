@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="button-addNew">
+             <button @click.prevent="showAdd">Add new Recipe</button>
+        </div>
         <div id="recipes">
             <ul class="recipes_list">
                 <li :key="index" v-for="(recipe, index) in dataRecipes" @click="changeRecipe($event,index)">{{recipe.title}}</li>
@@ -8,7 +11,10 @@
             <div class="recipes_description">
                 <div class="recipes_description-header">
                      <h3>{{dataRecipes[display].title}}</h3>
-                     <button class="button button--remove">Remove</button>
+                     <div class="buttons-wrap">
+                        <button class="button button--edit">Edit</button>
+                        <button @click="remove" class="button button--remove">Remove</button>
+                     </div>
                 </div>
                
                 <h4>Ingredients</h4>
@@ -20,6 +26,7 @@
                     <li :key="index" v-for="(direction,index) in dataRecipes[display].directions">{{direction}}</li>
                 </ol>
             </div>
+           
         </div>
         
 
@@ -51,6 +58,12 @@ var recipes = {
     methods: {
         changeRecipe: function(event,index){
             this.display = index;
+        },
+        showAdd: function(){
+            this.$emit('show',true);
+        },
+        remove: function(){
+            this.$emit('remove', this.display);
         }
     }
 }

@@ -1,32 +1,34 @@
 <template>
     <div>
         <div class="form-wrap">
-            <button @click.prevent="hideAdd">Close</button>
             <form>
                 <label for="addTitle">Recipe title</label>
-                <input type="text" placeholder="Add title" id="addTitle" v-model="recipeTitle"/>
+                <input type="text" placeholder="Add title" id="addTitle" v-model="dataRecipes[recipeToDisplay].title" />
                 <label>Ingrediens</label>
-                <textarea id="" cols="30" rows="10" v-model="recipeIngredients"></textarea>
+                <textarea id="" cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].recipeIngredients"></textarea>
                 <label>Directions</label>
-                <textarea id="" cols="30" rows="10" v-model="recipeDirections"></textarea>
-                <input type="submit" class="button" value="Add" @click.prevent="add" />
+                <textarea id="" cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].recipeDirections"></textarea>
+                <input type="submit" class="button" value="Update" @click.prevent="update" />
             </form>
         </div>
-        <p>Title: {{recipeTitle}}</p>
-        <p>Ingredients: {{recipeIngredients}}</p>
-        <p>Directions: {{recipeDirections}}</p>
+        
     </div>
 </template>
 
 <script>
-var addForm = {
-    props:{
-         dataRecipes: {
+var updateForm = {
+    props: {
+        dataRecipes: {
             type: Array,
             required: true
         },
-        showAddForm:{
-            type:Boolean
+        recipeToDisplay:{
+            type: Number,
+            required: true
+        },
+        showUpdateForm: {
+            type: Boolean,
+            required: true
         }
     },
     data(){
@@ -35,6 +37,7 @@ var addForm = {
             recipeTitle: '',
             recipeIngredients: '',
             recipeDirections:'',
+            display: this.recipeToDisplay
         }
     },
     methods: {
@@ -42,11 +45,11 @@ var addForm = {
         hideAdd: function(){
             this.$emit('hide',false);
         },
-        add: function(){
+        update: function(){
             console.log(this.recipeIngredients);
             let ing = this.recipeIngredients.includes('/') ? this.recipeIngredients.split('/') : [this.recipeIngredients];
             let dir = this.recipeDirections.includes('/') ? this.recipeDirections.split('/') : [this.recipeDirections];
-            this.$emit('newR', {
+            this.$emit('updateR', {
                 title: this.recipeTitle,
                 ingredients: ing,
                 directions: dir
@@ -55,7 +58,7 @@ var addForm = {
     }
 }
 
-export default addForm;
+export default updateForm;
 </script>
 <style scoped>
 label,
