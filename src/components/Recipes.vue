@@ -12,7 +12,7 @@
                 <div class="recipes_description-header">
                      <h3>{{dataRecipes[display].title}}</h3>
                      <div class="buttons-wrap">
-                        <button class="button button--edit">Edit</button>
+                        <button @click.prevent="showUpdate" class="button button--edit">Edit</button>
                         <button @click="remove" class="button button--remove">Remove</button>
                      </div>
                 </div>
@@ -58,9 +58,13 @@ var recipes = {
     methods: {
         changeRecipe: function(event,index){
             this.display = index;
+            this.$emit('indexChange', index);
         },
         showAdd: function(){
             this.$emit('show',true);
+        },
+        showUpdate: function(){
+            this.$emit('updateShow',true);
         },
         remove: function(){
             this.$emit('remove', this.display);

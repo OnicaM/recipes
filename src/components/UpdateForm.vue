@@ -5,11 +5,12 @@
                 <label for="addTitle">Recipe title</label>
                 <input type="text" placeholder="Add title" id="addTitle" v-model="dataRecipes[recipeToDisplay].title" />
                 <label>Ingrediens</label>
-                <textarea id="" cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].recipeIngredients"></textarea>
+                <textarea cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].ingredients"></textarea>
                 <label>Directions</label>
-                <textarea id="" cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].recipeDirections"></textarea>
+                <textarea cols="30" rows="10" v-model="dataRecipes[recipeToDisplay].directions"></textarea>
                 <input type="submit" class="button" value="Update" @click.prevent="update" />
             </form>
+            <button @click="displayAll">click</button>
         </div>
         
     </div>
@@ -37,16 +38,22 @@ var updateForm = {
             recipeTitle: '',
             recipeIngredients: '',
             recipeDirections:'',
-            display: this.recipeToDisplay
+            display: this.recipeToDisplay,
+            joinIngredients: this.dataRecipes[recipeToDisplay].ingredients.join('/')
         }
     },
     methods: {
-      
+        displayAll: function(){
+            console.log(this.dataRecipes[this.display]);
+            this.joinIngredients = this.dataRecipes[this.display].ingredients.join('/');
+            console.log(joinIngredients);
+        },
         hideAdd: function(){
             this.$emit('hide',false);
+            
         },
         update: function(){
-            console.log(this.recipeIngredients);
+           
             let ing = this.recipeIngredients.includes('/') ? this.recipeIngredients.split('/') : [this.recipeIngredients];
             let dir = this.recipeDirections.includes('/') ? this.recipeDirections.split('/') : [this.recipeDirections];
             this.$emit('updateR', {
