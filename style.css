@@ -39,11 +39,91 @@ ul.recipes_list {
 .form-wrap {
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 45px 20px 20px 20px;
     background: lightgreen;
     text-align: center;
     border-radius: 5px;
+    position: relative;
 }
 .recipes_description {
     width: 50%;
+}
+button.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: red;
+    border: 0;
+    color: #fff;
+    border-radius: 100%;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 4px 9px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    font-size: 10px;
+    min-width: auto;
+}
+input,
+textarea {
+    padding: 5px;
+    width: 100%;
+    margin: 9px 0;
+    border-radius: 3px;
+    border: 1px solid darkseagreen;
+}
+label {
+    font-weight: 700;
+    text-decoration: underline;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    color: darkgreen;
+}
+button {
+    background: green;
+    color: #fff;
+    padding: 8px 20px;
+    border: 1px solid;
+    border-radius: 5px;
+    min-width: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid green;
+    transition: all 0.3s;
+    transform: rotate(0);
+}
+button:hover{
+   opacity: 0.9;
+}
+.buttons-wrap button {
+    border: 1px solid #fff;
+}
+.buttons-wrap button:hover{
+    background: rgba(255, 255, 255, 0.1)
+}
+.button-addNew{
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+}
+div#app {
+    position: relative;
+}
+.form-wrap {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 45px 20px 20px 20px;
+    background: lightgreen;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+.form-wrap--add{
+    left: 50px;
+}
+.form-wrap--update{
+    right: 50px;
 }

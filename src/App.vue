@@ -8,7 +8,6 @@
       v-bind:showAddForm="showAddForm"
       v-on:show="showaddForm($event)"
       v-on:remove="removeRecipe($event)"
-      v-on:updateR="updateF($event)"
       v-on:updateShow="showUpdate($event)"
       v-on:indexChange="changeIndex($event)"
      >
@@ -17,13 +16,15 @@
     v-bind:dataRecipes="dataRecipes" 
     v-on:newR="addF($event)"
     v-show="showAddForm" 
-    v-on:hideAdd="hideAddForm($event)">
+    v-on:closeForm="close($event)">
     </add-recipe-form>
 
     <update-form 
     v-bind:dataRecipes="dataRecipes" 
     v-bind:recipeToDisplay="recipeToDisplay"
     v-show="showUpdateForm" 
+    v-on:updateR="updateF($event)"
+    v-on:closeForm="close($event)"
     v-bind:showUpdateForm="showUpdateForm"
    ></update-form>
   </div>
@@ -77,29 +78,27 @@ export default {
       },
       hideAddForm: function(hide){
         this.showAddForm = hide;
-        console.log(hide);
       },
       showaddForm: function(show){
         this.showAddForm = !this.showAddForm;
-        console.log(show);
       },
       showUpdate: function(update){
         this.showUpdateForm = !this.showUpdateForm;
-        console.log(update);
+  
       },
       addF: function(newR){
-        // this.dataRecipes = newR;
         this.dataRecipes.push(newR);
         this.showAddForm = false;
         this.saveRecipes();
       },
-      updateF: function(update){
-        // this.dataRecipes = newR;
-        
-        this.dataRecipes.push(update);
+      updateF: function(up){
+        this.dataRecipes.splice(up.recipeId, 1, up);
         this.showUpdateForm= false;
         this.saveRecipes();
-        console.log(update);
+      },
+      close:function(close){
+        this.showUpdateForm = close;
+        this.showAddForm = close;
       },
       removeRecipe(x) {
         this.dataRecipes.splice(x, 1);

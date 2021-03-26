@@ -1,14 +1,15 @@
 <template>
     <div>
-        <div class="form-wrap">
-            <button @click.prevent="hideAdd">Close</button>
+        <div class="form-wrap form-wrap--add">
+            <button @click.prevent="closeForm" class="close">X</button>
+            <h3>Add new recipe</h3>
             <form>
                 <label for="addTitle">Recipe title</label>
                 <input type="text" placeholder="Add title" id="addTitle" v-model="recipeTitle"/>
                 <label>Ingrediens</label>
-                <textarea id="" cols="30" rows="10" v-model="recipeIngredients"></textarea>
+                <textarea id="" cols="30" rows="5" v-model="recipeIngredients" placeholder="Separate each ingredient with a '\': Milk \ 2 Eggs \ 1/3 Cup Sugar"></textarea>
                 <label>Directions</label>
-                <textarea id="" cols="30" rows="10" v-model="recipeDirections"></textarea>
+                <textarea id="" cols="30" rows="5" v-model="recipeDirections" placeholder="Separate each ingredient with a '\': Milk \ 2 Eggs \ 1/3 Cup Sugar"></textarea>
                 <input type="submit" class="button" value="Add" @click.prevent="add" />
             </form>
         </div>
@@ -38,12 +39,11 @@ var addForm = {
         }
     },
     methods: {
-      
-        hideAdd: function(){
-            this.$emit('hide',false);
+        closeForm: function(){
+            this.$emit('closeForm', false);
         },
+       
         add: function(){
-            console.log(this.recipeIngredients);
             let ing = this.recipeIngredients.includes('/') ? this.recipeIngredients.split('/') : [this.recipeIngredients];
             let dir = this.recipeDirections.includes('/') ? this.recipeDirections.split('/') : [this.recipeDirections];
             this.$emit('newR', {

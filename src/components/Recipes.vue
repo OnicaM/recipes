@@ -67,7 +67,7 @@ var recipes = {
             this.$emit('updateShow',true);
         },
         remove: function(){
-            this.$emit('remove', this.display);
+            this.$emit('remove', this.recipeToDisplay);
         }
     }
 }
